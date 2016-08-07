@@ -10,6 +10,16 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.researchgate.release' version '2.4.0'
+}
+
+release {
+    preTagCommitMessage = 'Prepare for release: '
+    tagCommitMessage = 'Creating tag  $version'
+    newVersionCommitMessage = 'Prepare for next development iteration'
+}
+
 apply plugin: "kotlin"
 
 repositories {
@@ -24,7 +34,6 @@ dependencies {
 }
 
 mainClassName = "ru.demkin.app.MyApp"
-
 
 task fatJar(type: Jar) {
     manifest {
