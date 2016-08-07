@@ -24,12 +24,12 @@ dependencies {
 }
 
 mainClassName = "ru.demkin.app.MyApp"
-version = 1.0
+
 
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Music generator',
-                'Implementation-Version': version,
+                'Implementation-Version': '$version',
                 'Main-Class': 'ru.demkin.app.MyApp'
     }
     baseName = project.name + '-all'
