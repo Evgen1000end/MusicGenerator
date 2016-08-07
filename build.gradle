@@ -23,12 +23,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-jar {
+mainClassName = "ru.demkin.app.MyApp"
+version = 1.0
+
+task fatJar(type: Jar) {
     manifest {
-        attributes(
-                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+        attributes 'Implementation-Title': 'Music generator',
+                'Implementation-Version': version,
                 'Main-Class': 'ru.demkin.app.MyApp'
-        )
     }
-    from configurations.compile.collect { entry -> zipTree(entry) }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
