@@ -9,9 +9,9 @@ import tornadofx.ViewModel
  * @since 07.08.2016
  */
 class SoundbankPath {
-    val pathProperty = SimpleStringProperty()
+  val pathProperty = SimpleStringProperty()
 }
 
-class UserModel(var soundbankPath: SoundbankPath):ViewModel(){
-    val path = bind { soundbankPath.pathProperty }
+class UserModel(var soundbankPath: SoundbankPath) : ViewModel() {
+  val path = bind { soundbankPath.pathProperty }
 }

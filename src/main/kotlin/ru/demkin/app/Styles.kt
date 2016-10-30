@@ -8,31 +8,32 @@ import tornadofx.cssclass
 import tornadofx.px
 
 class Styles : Stylesheet() {
-    companion object {
-        val login by cssclass()
-        val loginWidht = 600.px
-        val logi by cssclass()
-    }
-    init {
-        form and login {
-            padding = box(25.px)
-            spacing = 10.px
-            fontSize = 20.px
-            fontWeight = FontWeight.BOLD
-            prefWidth = loginWidht
-            button {
-                prefWidth = loginWidht
-            }
+  companion object {
+    val login by cssclass()
+    val loginWidht = 600.px
+    val logi by cssclass()
+  }
 
-            progressIndicator {
-                prefWidth = 16.px
-                prefHeight = prefWidth
-            }
-        }
+  init {
+    form and login {
+      padding = box(25.px)
+      spacing = 10.px
+      fontSize = 20.px
+      fontWeight = FontWeight.BOLD
+      prefWidth = loginWidht
+      button {
+        prefWidth = loginWidht
+      }
 
-        logi  {
-            fontStyle = FontPosture.ITALIC
-            spacing = 20.px
-        }
+      progressIndicator {
+        prefWidth = 16.px
+        prefHeight = prefWidth
+      }
     }
+
+    logi {
+      fontStyle = FontPosture.ITALIC
+      spacing = 20.px
+    }
+  }
 }

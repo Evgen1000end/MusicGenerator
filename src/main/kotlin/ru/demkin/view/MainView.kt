@@ -1,81 +1,55 @@
 package ru.demkin.view
 
-import javafx.beans.property.SimpleBooleanProperty
-import javafx.geometry.Orientation
-import javafx.scene.control.Alert
-import javafx.scene.control.Alert.AlertType.WARNING
-import javafx.scene.control.Button
-import javafx.scene.control.ProgressIndicator
-import javafx.scene.layout.HBox
-import javafx.scene.layout.VBox
-import javafx.stage.FileChooser
-import javafx.stage.Window
-import ru.demkin.app.Styles
-import ru.demkin.controllers.GitHub
+import javafx.scene.control.Label
+import javafx.scene.layout.StackPane
+import jm.constants.Durations
+import jm.constants.ProgramChanges
+import jm.music.data.Note
+import jm.music.data.Part
+import jm.music.data.Phrase
+import jm.music.data.Score
 import ru.demkin.models.RealTimePlayer
-import ru.demkin.models.SoundbankPath
-import ru.demkin.models.UserModel
-import tornadofx.*
+import tornadofx.View
 
-class MainView : View() {
-    override val root = Form().addClass(Styles.login)
-    val model =UserModel(SoundbankPath())
-    val github: GitHub by inject()
+/**
+ * Description of ru.demkin.view
+ * @author evgen1000end
+ * @since 07.08.2016
+ */
+class MainView(val soundbankPath: String) : View() {
+  override val root = StackPane(Label("You are logged in"))
 
-    var player:RealTimePlayer? = null
-
-    val checkValue = SimpleBooleanProperty()
-
-    init {
-        title = "Soundbank loading"
-        model.path.value = "C:\\PROJECTS\\JMG\\soundfonts\\fluid.sf2"
-        with (root) {
-
-            hbox {
-                addClass(Styles.logi)
-                textfield(model.path).required(message = "Insert your path")
-                button("Select") {
-
-                    setOnAction {
-                        val fileChooser = FileChooser()
-                        model.path.value = fileChooser.showOpenDialog(null).absolutePath
-                    }
-                }
-            }
-            checkbox("By default") {
-                bind(checkValue)
-                setOnAction {
-                    println("Hello, checkbox $isSelected")
-                }
-            }
-
-            button("Log in") {
-                setOnAction {
-                    load()
-                }
-            }
-        }
+  init {
+    val player = RealTimePlayer(soundbankPath)
+    Thread(player).start()
+    player.playScore(generateTestScore())
+    with(root) {
     }
+  }
 
-    private fun loadMidi():Boolean {
-        player = RealTimePlayer(model.path.value)
+  private fun generateTestScore(): Score {
+    val score = Score("Chaos", 120.0)
+    val guitarPart = Part("Choir", ProgramChanges.CHOIR, 0)
+    val phr = Phrase(0.0)
+    var xold = 0.0
+    var x: Double
+    var y: Double
+    var yold = 0.0
 
-        return true
+    var a = 1.4
+    var b = 0.3
+
+    for (i in 0..999) {
+      x = 1 + yold - a * xold * xold
+      y = b * xold
+      val note = Note((x * 24 + 48).toInt(), Durations.C)
+      phr.addNote(note)
+      xold = x
+      yold = y
     }
+    guitarPart.addPhrase(phr)
+    score.addPart(guitarPart)
 
-    private fun Button.load(){
-        if (checkValue.value) {
-            if (model.commit()){
-                runAsync {
-                    loadMidi()
-                } ui { success ->
-                    if (success){
-                        replaceWith(ProtectedView::class, ViewTransition.SlideIn)
-                    } else {
-                        alert(WARNING, "Load soundfont failed", "Check path")
-                    }
-                }
-            }
-        }
-    }
+    return score
+  }
 }
