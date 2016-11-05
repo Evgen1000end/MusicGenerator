@@ -4,9 +4,7 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.ViewModel
 
 /**
- * Description of ru.demkin.models
- * @author evgen1000end
- * @since 07.08.2016
+ * @author <a href="mailto:evgen1000end@gmail.com">demkinev</a>
  */
 class SoundbankPath {
   val pathProperty = SimpleStringProperty()

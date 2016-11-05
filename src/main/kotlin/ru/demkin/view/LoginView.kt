@@ -11,7 +11,9 @@ import ru.demkin.controllers.GitHub
 import ru.demkin.models.SoundbankPath
 import ru.demkin.models.UserModel
 import tornadofx.*
-
+/**
+ * @author <a href="mailto:evgen1000end@gmail.com">demkinev</a>
+ */
 class LoginView : View() {
 
   val logger = LoggerFactory.getLogger(LoginView::class.java)

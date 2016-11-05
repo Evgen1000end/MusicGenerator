@@ -6,7 +6,9 @@ import tornadofx.Stylesheet
 import tornadofx.box
 import tornadofx.cssclass
 import tornadofx.px
-
+/**
+ * @author <a href="mailto:evgen1000end@gmail.com">demkinev</a>
+ */
 class Styles : Stylesheet() {
   companion object {
     val login by cssclass()

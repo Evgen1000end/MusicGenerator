@@ -15,11 +15,9 @@ import javax.sound.midi.Sequencer
 import javax.sound.midi.Synthesizer
 
 /**
- * Description of ru.demkin.models
- * @author evgen1000end
- * @since 07.08.2016
+ * @author <a href="mailto:evgen1000end@gmail.com">demkinev</a>
  */
-class RealTimePlayer : Runnable {
+class RealTimePlayer : Thread {
   val logger = LoggerFactory.getLogger(RealTimePlayer::class.java)
   private val soundBankPath: String
   var isReady = false

@@ -12,9 +12,7 @@ import ru.demkin.models.RealTimePlayer
 import tornadofx.View
 
 /**
- * Description of ru.demkin.view
- * @author evgen1000end
- * @since 07.08.2016
+ * @author <a href="mailto:evgen1000end@gmail.com">demkinev</a>
  */
 class MainView(val soundbankPath: String) : View() {
   override val root = StackPane(Label("You are logged in"))
